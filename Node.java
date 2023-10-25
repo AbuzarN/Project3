@@ -5,13 +5,13 @@ public class Node <generic extends Comparable<generic>>
     private generic Payload;
     public Node(generic dvd)
     {
-        payload=dvd;
+        Payload=dvd;
     }
     public generic getLeft(){return Left;}
     public generic getRight(){return Right;}
     public generic getPayload(){return Payload;}
 
-    public setLeft(generic left){Left=left;}
-    public setRight(generic right){Right=right;}
-    public setPayload(generic payload){Payload=payload;}
+    public void setLeft(generic left){Left=left;}
+    public void setRight(generic right){Right=right;}
+    public void setPayload(generic payload){Payload=payload;}
 }
