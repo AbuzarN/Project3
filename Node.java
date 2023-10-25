@@ -1,19 +1,21 @@
 //Syed Naqvi
 //San190003
-public class Node <generic extends Comparable<generic>>
+public class Node<T extends Comparable<T>>
 {
-    private generic Left;
-    private generic Right;
-    private generic Payload;
-    public Node(generic dvd)
+    private Node<T> left;
+    private Node<T> right;
+    private T payload;
+    public Node(Node<T> left, Node<T> right, T dvd)
     {
-        Payload=dvd;
+        this.left =left;
+        this.right =right;
+        this.payload=dvd;
     }
-    public generic getLeft(){return Left;}
-    public generic getRight(){return Right;}
-    public generic getPayload(){return Payload;}
+    public Node<T> getLeft(){return this.left;}
+    public Node<T> getRight(){return this.right;}
+    public T getPayload(){return this.payload;}
 
-    public void setLeft(generic left){Left=left;}
-    public void setRight(generic right){Right=right;}
-    public void setPayload(generic payload){Payload=payload;}
+    public void setLeft(Node<T> left){this.left=left;}
+    public void setRight(Node<T> right){this.right=right;}
+    public void setPayload(T payload){this.payload=payload;}
 }

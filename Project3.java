@@ -13,7 +13,7 @@ public class Project3
         scnr.close();
         FileInputStream Fstream = new FileInputStream(fileName);
         Scanner fScnr = new Scanner(Fstream);
-        BinTree B = new BinTree();
+        BinTree <DVD> B = new BinTree <DVD>();
         while (fScnr.hasNextLine())
         {
             String line =  fScnr.nextLine();
@@ -21,9 +21,8 @@ public class Project3
             DVD temp = new DVD( parts[0], Integer.parseInt(parts[1]) , Integer.parseInt(parts[2])); 
             System.out.print(temp.getTitle()+" "+temp.getAvalible()+" "+temp.getRented());
             System.out.println();
-            Node tempNode = new Node(temp);
-            B.insert(tempNode);
-            
+            Node tempNode = new Node (null, null, temp);
+            B.insert(tempNode);   
         }
         fScnr.close();
         Fstream.close();

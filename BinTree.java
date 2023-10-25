@@ -1,9 +1,14 @@
 //Syed Naqvi
 //San190003
-public class BinTree <generic extends Comparable <generic>>
+public class BinTree <T extends Comparable <T>>
 {
-    private Node root;
-    public void insert(generic node)
+    private Node<T> root = null;
+    public BinTree(){}
+    public BinTree(T node)
+    {
+      root = new Node<T>(null,null, node);
+    }
+    public void insert(Node<T> node)
     {
       if (root == null) {
          root = node;
@@ -13,7 +18,7 @@ public class BinTree <generic extends Comparable <generic>>
          while (currentNode != null) {
             if (node.getPayload() < currentNode.getPayload()) {
                if (currentNode.getLeft() == null) {
-                  curNode.setLeft(Node);
+                  currentNode.setLeft(Node);
                   currentNode = null;
                }
                else {
@@ -32,12 +37,12 @@ public class BinTree <generic extends Comparable <generic>>
          }
       }
     }   
-    public Node search(generic dvd)
+    public Node search(T dvd)
     {
         Node cur = root;
         while(cur != null)
         {
-            if (dvd=cur.getPayload())
+            if (dvd.equals(cur.getPayload()))
             {
                 return cur;
             }
@@ -52,7 +57,7 @@ public class BinTree <generic extends Comparable <generic>>
             return null;
         }
     }
-    public void delete(generic dvd)
+    public void delete(T dvd)
     {
         Node par = null;
         Node cur = root;

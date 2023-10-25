@@ -1,6 +1,6 @@
 //Syed Naqvi
 //San190003
-public class DVD 
+public class DVD implements Comparable<DVD>
 {
     private String Title;
     private int Avalible;
