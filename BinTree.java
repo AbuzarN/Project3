@@ -1,9 +1,36 @@
+//Syed Naqvi
+//San190003
 public class BinTree <generic extends Comparable <generic>>
 {
     private Node root;
     public void insert(generic node)
     {
-
+      if (root == null) {
+         root = node;
+      }
+      else {
+         Node currentNode = root;
+         while (currentNode != null) {
+            if (node.getPayload() < currentNode.getPayload()) {
+               if (currentNode.getLeft() == null) {
+                  curNode.setLeft(Node);
+                  currentNode = null;
+               }
+               else {
+                  currentNode = currentNode.getLeft();
+               }
+            }
+            else {
+               if (currentNode.getRight() == null) {
+                  currentNode.setRight(node);
+                  currentNode = null;
+               }
+               else {
+                  currentNode = currentNode.getRight();
+               }
+            }
+         }
+      }
     }   
     public Node search(generic dvd)
     {

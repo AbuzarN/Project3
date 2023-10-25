@@ -1,4 +1,7 @@
-public class DVD {
+//Syed Naqvi
+//San190003
+public class DVD 
+{
     private String Title;
     private int Avalible;
     private int Rented;

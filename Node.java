@@ -1,3 +1,5 @@
+//Syed Naqvi
+//San190003
 public class Node <generic extends Comparable<generic>>
 {
     private generic Left;
