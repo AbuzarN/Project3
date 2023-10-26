@@ -11,6 +11,18 @@ public class DVD implements Comparable<DVD>
         this.Avalible = Avalible;
         this.Rented =Rented;   
     }
+
+    @Override
+    public int compareTo(DVD A)
+    {
+        return (this.getTitle()).compareTo(A.getTitle());
+    }
+    @Override
+    public String toString(){
+        return "" + "Title: " + getTitle() + " Available: " + getAvalible() + " Rented: " + getRented();
+    }
+
+
     public String getTitle(){return this.Title;}
     public int getAvalible(){return this.Avalible;}
     public int getRented(){return this.Rented;}

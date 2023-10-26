@@ -14,11 +14,11 @@ public class BinTree <T extends Comparable <T>>
          root = node;
       }
       else {
-         Node currentNode = root;
+         Node<T> currentNode = root;
          while (currentNode != null) {
-            if (node.getPayload() < currentNode.getPayload()) {
+            if (node.getPayload().compareTo(currentNode.getPayload())<0) {
                if (currentNode.getLeft() == null) {
-                  currentNode.setLeft(Node);
+                  currentNode.setLeft(node);
                   currentNode = null;
                }
                else {
@@ -33,34 +33,39 @@ public class BinTree <T extends Comparable <T>>
                else {
                   currentNode = currentNode.getRight();
                }
-            }
+            }            
          }
       }
     }   
-    public Node search(T dvd)
+    public T search(T dvd)
     {
-        Node cur = root;
+        Node<T> cur = root;
         while(cur != null)
         {
-            if (dvd.equals(cur.getPayload()))
+         //System.out.println(((DVD)cur.getPayload()).getTitle());
+            //System.out.println("dvd: "+((DVD)dvd).getTitle()+"/cur: "+((DVD)cur.getPayload()).getTitle()+"    "+ dvd.compareTo(cur.getPayload()));
+            if (dvd.compareTo(cur.getPayload())==0)
             {
-                return cur;
+               //System.out.println("1");
+                return cur.getPayload();
             }
-            else if (dvd<cur.getPayload())
+            else if (dvd.compareTo(cur.getPayload())<0)
             {
+               //System.out.println("2");
                 cur = cur.getLeft();
             }
             else
             {
+               //System.out.println("3");
                 cur = cur.getRight();
             }
-            return null;
         }
+        return null;
     }
     public void delete(T dvd)
     {
-        Node par = null;
-        Node cur = root;
+        Node<T> par = null;
+        Node<T> cur = root;
    while (cur !=null) { // Search for node
       if (cur.getPayload() == dvd) { // Node found 
          if (cur.getLeft() == null && cur.getRight() == null) { // Remove leaf
@@ -73,32 +78,38 @@ public class BinTree <T extends Comparable <T>>
          }
          else if (cur.getRight() == null) {                // Remove node with only left child
             if (par == null) // Node is root
+            {
                root = cur.getLeft();
+            }  
             else if (par.getLeft() == cur) 
+            {
                par.setLeft(cur.getLeft());
+            }
             else
-               par.setRight(cur.setRight());
+            {
+               par.setRight(cur.getRight());
+            }
          }
          else if (cur.getLeft() == null) {                // Remove node with only right child
             if (par == null) // Node is root
                root = cur.getLeft();
             else if (par.getLeft() == cur) 
-               par.setleft(cur.getRight());
+               par.setLeft(cur.getRight());
             else
                par.setRight(cur.getLeft());
          }
          else {                                      // Remove node with two children
             // Find successor (leftmost child of right subtree)
-            Node suc = cur.getRight();
-            while (suc.getleft() != null)
+            Node<T> suc = cur.getRight();
+            while (suc.getLeft() != null)
                suc = suc.getLeft();
-            successorData = suc.getPayload();
+            T successorData = suc.getPayload();
             delete(suc.getPayload());     // Remove successor
-            cur.setPayload=successorData;
+            cur.setPayload(successorData);
          }
          return ;// Node found and removed
       }
-      else if (cur.getPayload() < dvd) { // Search right
+      else if (cur.getPayload().compareTo(dvd)<0) { // Search right
          par = cur;
          cur = cur.getRight();
       }
