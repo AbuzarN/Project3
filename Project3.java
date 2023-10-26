@@ -35,17 +35,17 @@ public class Project3
             //System.out.println(line);
             if (parts[0].compareTo("add")==0)
             {
-                DVD temp = B.search(new DVD(parts[1],0,0));
-                if(temp!=null)
+                int num = Integer.parseInt(parts[1].substring(parts[1].indexOf(",")+1));
+                parts[1]= parts[1].substring(0, parts[1].indexOf(","));
+                if (B.search(new DVD(parts[1],0,0))==null)
                 {
-                    temp.setAvalible(temp.getAvalible()+Integer.parseInt(parts[2]));
+                    Node tempNode = new Node(null,null, new DVD(parts[1],num,0));
                 }
                 else
                 {
-                    Node tempNode =new Node(null,null,new DVD(parts[1],Integer.parseInt(parts[2]),0));
-                    B.insert(tempNode);
+                    M(B,new DVD(parts[1],0,0),num);
                 }
-                System.out.println("add");
+                
             }
             else if (parts[0].compareTo("remove")==0)
             {
@@ -66,5 +66,11 @@ public class Project3
         System.out.print(B.search(search));
         fScnr.close();
         Fstream.close();
+    }
+    public static void M(BinTree B, DVD key, int add)
+    {
+        Node tempNode = new Node(null,null,key);
+        DVD temp = (DVD) B.search(tempNode);
+        temp.setAvalible(temp.getAvalible()+add);
     }
 }
