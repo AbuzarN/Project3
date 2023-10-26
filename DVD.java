@@ -19,7 +19,10 @@ public class DVD implements Comparable<DVD>
     }
     @Override
     public String toString(){
-        return "" + "Title: " + getTitle() + " Available: " + getAvalible() + " Rented: " + getRented();
+        System.out.printf("%-28s", this.getTitle().substring(1,this.getTitle().length()-1));
+        System.out.printf("%-4s",getAvalible());
+        System.out.print(getRented());
+        return  "\n";
     }
 
 

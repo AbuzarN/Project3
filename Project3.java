@@ -21,12 +21,13 @@ public class Project3
             //System.out.print(temp.getTitle()+" "+temp.getAvalible()+" "+temp.getRented());
             //System.out.println();
 
-            System.out.println("Inserteing: "+ parts[0]+parts[1]+parts[2]);
+            //System.out.println("Inserteing: "+ parts[0]+parts[1]+parts[2]);
 
             Node tempNode = new Node (null, null, temp);
             B.insert(tempNode);   
-            System.out.println("");
+            //System.out.println("");
         }
+
         String logfile = scnr.nextLine();
         logfile = "sample_transaction.log";
         FileInputStream logStream = new FileInputStream(logfile);
@@ -36,7 +37,7 @@ public class Project3
         while(logScnr.hasNextLine())
         {
             String line = logScnr.nextLine();
-            String[] parts = line.split(" ");
+            String[] parts = line.split(" ",2);
             //System.out.println(line);
             if (parts[0].compareTo("add")==0)
             {
@@ -46,7 +47,7 @@ public class Project3
                 DVD temp  = new DVD(parts[1],0,0);
                 if (B.search(new DVD(parts[1],0,0))==null)
                 {
-                    Node tempNode= new Node(null, null, temp);   
+                    Node tempNode= new Node(null, null, temp);
                     B.insert(tempNode);
                 }
                 else
@@ -57,8 +58,18 @@ public class Project3
             }
             else if (parts[0].compareTo("remove")==0)
             {
+                int num = Integer.parseInt(parts[1].substring(parts[1].indexOf(",")+1));
+                parts[1]= parts[1].substring(0, parts[1].indexOf(","));
+
                 DVD temp  = new DVD(parts[1],0,0);
-                B.delete(temp);
+                if ( ((DVD)B.search(temp)).getAvalible() + ((DVD)B.search(temp)).getRented()  - num == 0)
+                {
+                    B.delete(temp);
+                }
+                else
+                {
+                    M(B,temp, -1 * num);
+                }
             }
             else if (parts[0].compareTo("rent")==0)
             {
@@ -67,13 +78,12 @@ public class Project3
             }
             else if (parts[0].compareTo("return")==0)
             {
-                //System.out.println("return");
                 DVD temp  = new DVD(parts[1],0,0);
                 returnDVD(B,temp);
             }
         }
-
-
+        
+        B.printInorder(B.getRoot());
         //DVD search = new DVD("\"The Crow\"", 0, 100);
         //System.out.print(B.search(search));
         fScnr.close();
@@ -84,21 +94,21 @@ public class Project3
         //Node tempNode = new Node(null,null,key);
         DVD temp = (DVD) B.search(key);
         temp.setAvalible(temp.getAvalible()+add);
-        System.out.println(B.search(key));
+        //System.out.println(B.search(key));
     }
     public static void rent(BinTree<DVD> B, DVD key)
     {
         DVD temp = (DVD) B.search(key);
         temp.setAvalible(temp.getAvalible()-1);
         temp.setRented(temp.getRented()+1);
-        System.out.println(B.search(key));
+        //System.out.println(B.search(key));
     }
     public static void returnDVD(BinTree<DVD> B, DVD key)
     {
         //System.out.println("start");
         DVD temp = (DVD) B.search(key);
-        //temp.setAvalible(temp.getAvalible()+1);
-        //temp.setRented(temp.getRented()-1);
-        System.out.println(B.search(key));
+        temp.setAvalible(temp.getAvalible()+1);
+        temp.setRented(temp.getRented()-1);
+        //System.out.println(B.search(key));
     }
 }

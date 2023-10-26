@@ -18,31 +18,31 @@ public class BinTree <T extends Comparable <T>>
          Node<T> currentNode = root;
          while (currentNode != null) {
 
-            System.out.println( ((DVD)currentNode.getPayload()).getTitle() );
+            //System.out.println( ((DVD)currentNode.getPayload()).getTitle() );
 
             if (node.getPayload().compareTo(currentNode.getPayload())<0) {
                if (currentNode.getLeft() == null) 
                {
-                  System.out.println("2");  
+                  //System.out.println("2");  
                   currentNode.setLeft(node);
                   currentNode = null;
                }
                else 
                {
-                  System.out.println("2");
+                  //System.out.println("2");
                   currentNode = currentNode.getLeft();
                }
             }
             else {
                if (currentNode.getRight() == null) 
                {
-                  System.out.println("3");
+                  //System.out.println("3");
                   currentNode.setRight(node);
                   currentNode = null;
                }
                else 
                {
-                  System.out.println("3");
+                  //ystem.out.println("3");
                   currentNode = currentNode.getRight();
                }
             }            
@@ -131,5 +131,25 @@ public class BinTree <T extends Comparable <T>>
       }
    }
    return ;// Node not found
+    }
+
+    public void printInorder(Node<T> node)
+    {
+        if (node == null)
+            return;
+ 
+        // First recur on left child
+        printInorder(node.getLeft());
+ 
+        // Then print the data of node
+        System.out.println(node.toString());
+ 
+        // Now recur on right child
+        printInorder(node.getRight());
+    }
+
+    public Node<T> getRoot()
+    {
+      return root;
     }
 }
