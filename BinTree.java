@@ -10,27 +10,39 @@ public class BinTree <T extends Comparable <T>>
     }
     public void insert(Node<T> node)
     {
+      
       if (root == null) {
          root = node;
       }
       else {
          Node<T> currentNode = root;
          while (currentNode != null) {
+
+            System.out.println( ((DVD)currentNode.getPayload()).getTitle() );
+
             if (node.getPayload().compareTo(currentNode.getPayload())<0) {
-               if (currentNode.getLeft() == null) {
+               if (currentNode.getLeft() == null) 
+               {
+                  System.out.println("2");  
                   currentNode.setLeft(node);
                   currentNode = null;
                }
-               else {
+               else 
+               {
+                  System.out.println("2");
                   currentNode = currentNode.getLeft();
                }
             }
             else {
-               if (currentNode.getRight() == null) {
+               if (currentNode.getRight() == null) 
+               {
+                  System.out.println("3");
                   currentNode.setRight(node);
                   currentNode = null;
                }
-               else {
+               else 
+               {
+                  System.out.println("3");
                   currentNode = currentNode.getRight();
                }
             }            
