@@ -2,12 +2,15 @@
 //San190003
 public class BinTree <T extends Comparable <T>>
 {
+   //Bintree member vars
     private Node<T> root = null;
     public BinTree(){}
+    //constructor
     public BinTree(T node)
     {
       root = new Node<T>(null,null, node);
     }
+    //insert function from zybooks
     public void insert(Node<T> node)
     {
       
@@ -49,6 +52,7 @@ public class BinTree <T extends Comparable <T>>
          }
       }
     }   
+    //search function from zybooks
     public T search(T dvd)
     {
         Node<T> cur = root;
@@ -74,6 +78,7 @@ public class BinTree <T extends Comparable <T>>
         }
         return null;
     }
+    //delete function from zybooks
     public void delete(T dvd)
     {
         Node<T> par = null;
@@ -132,7 +137,7 @@ public class BinTree <T extends Comparable <T>>
    }
    return ;// Node not found
     }
-
+   //transversal method recursive to print the log
     public void printInorder(Node<T> node)
     {
         if (node == null)
@@ -147,7 +152,7 @@ public class BinTree <T extends Comparable <T>>
         // Now recur on right child
         printInorder(node.getRight());
     }
-
+   //return root function for recursive log
     public Node<T> getRoot()
     {
       return root;
