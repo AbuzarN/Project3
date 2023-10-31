@@ -81,7 +81,7 @@ public class Main
 
                 DVD temp  = new DVD(parts[1],0,0);
                 //if the avalible + rented =0 then delete node
-                if ( (B.search(temp)).getAvalible() + (B.search(temp)).getRented()  - num == 0)
+                if ( (B.search(temp)).getAvalible() + (B.search(temp)).getRented() - num <= 0)
                 {
                     B.delete(temp);
                 }
@@ -109,6 +109,7 @@ public class Main
         //System.out.print(B.search(search));
         
         //closing scnaers
+        logScnr.close();
         fScnr.close();
         Fstream.close();
     }

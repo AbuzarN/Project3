@@ -78,65 +78,47 @@ public class BinTree <T extends Comparable <T>>
         }
         return null;
     }
-    //delete function from zybooks
     public void delete(T dvd)
     {
-        Node<T> par = null;
-        Node<T> cur = root;
-   while (cur !=null) { // Search for node
-      if (cur.getPayload() == dvd) { // Node found 
-         if (cur.getLeft() == null && cur.getRight() == null) { // Remove leaf
-            if (par == null) // Node is root
-               root = null;
-            else if (par.getLeft() == cur) 
-               par.setLeft(null);
-            else
-               par.setRight (null);
-         }
-         else if (cur.getRight() == null) {                // Remove node with only left child
-            if (par == null) // Node is root
-            {
-               root = cur.getLeft();
-            }  
-            else if (par.getLeft() == cur) 
-            {
-               par.setLeft(cur.getLeft());
-            }
-            else
-            {
-               par.setRight(cur.getRight());
-            }
-         }
-         else if (cur.getLeft() == null) {                // Remove node with only right child
-            if (par == null) // Node is root
-               root = cur.getLeft();
-            else if (par.getLeft() == cur) 
-               par.setLeft(cur.getRight());
-            else
-               par.setRight(cur.getLeft());
-         }
-         else {                                      // Remove node with two children
-            // Find successor (leftmost child of right subtree)
-            Node<T> suc = cur.getRight();
-            while (suc.getLeft() != null)
-               suc = suc.getLeft();
-            T successorData = suc.getPayload();
-            delete(suc.getPayload());     // Remove successor
-            cur.setPayload(successorData);
-         }
-         return ;// Node found and removed
-      }
-      else if (cur.getPayload().compareTo(dvd)<0) { // Search right
-         par = cur;
-         cur = cur.getRight();
-      }
-      else {                     // Search left
-         par = cur;
-         cur = cur.getLeft();
-      }
-   }
-   return ;// Node not found
+      delete2(getRoot(),dvd);
     }
+    //delete function 
+    private Node<T> delete2(Node<T> node, T dvd)
+    {
+      if (node == null)
+      {return node;}
+
+      else if (dvd.compareTo(node.getPayload()) < 0) 
+      {node.setLeft(delete2(node.getLeft(), dvd));} 
+
+      else if (dvd.compareTo(node.getPayload()) > 0) 
+      {node.setRight(delete2(node.getRight(), dvd));} 
+
+      else
+      {
+          if (node.getLeft() == null) 
+          {return node.getRight();} 
+          
+          else if (node.getRight() == null)
+          {return node.getLeft();}    
+
+          node.setPayload(leftBranchleaf(node.getRight()));
+          node.setRight(delete2(node.getRight(), node.getPayload()));
+      }
+
+      return node;
+    }
+    private T leftBranchleaf(Node<T> node) 
+    {
+        T leaf = node.getPayload();
+        while (node.getLeft() != null) 
+        {
+            leaf = node.getLeft().getPayload();
+            node = node.getLeft();
+        }
+        return leaf;
+    }
+
    //transversal method recursive to print the log
     public void printInorder(Node<T> node)
     {
