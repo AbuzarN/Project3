@@ -2,7 +2,9 @@
 //San190003
 //import files
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.File;
 import java.util.*;
 public class Main
 {
@@ -11,9 +13,17 @@ public class Main
        //create a String to use to open a file of that name
         Scanner scnr = new Scanner (System.in);
         System.out.println("Enter Inventory File Name: ");
-        String fileName = scnr.nextLine();
-        FileInputStream Fstream = new FileInputStream(fileName);
-        Scanner fScnr = new Scanner(Fstream);
+        File i = new File(scnr.nextLine());
+        Scanner fScnr = null;
+        try
+        {
+            fScnr = new Scanner(i);
+        }
+        catch (FileNotFoundException e)
+        {
+            System.out.println("File DNE");
+            return;
+        }
         
         //create a binary tree
         BinTree <DVD> B = new BinTree <DVD>();
@@ -36,16 +46,24 @@ public class Main
         
         //create a string to read the log
         System.out.println("Enter log File Name: ");
-        String logfile = scnr.nextLine();
-        FileInputStream logStream = new FileInputStream(logfile);
-        Scanner logScnr = new Scanner(logStream);
+        i = new File(scnr.nextLine());
+        Scanner lScnr = null;
+        try
+        {
+            lScnr = new Scanner(i);
+        }
+        catch (FileNotFoundException e)
+        {
+            System.out.println("File DNE");
+            return;
+        }
 
         //Log raed
         //Read all log lines
-        while(logScnr.hasNextLine())
+        while(lScnr.hasNextLine())
         {
            //parse the log lines by " "
-            String line = logScnr.nextLine();
+            String line = lScnr.nextLine();
             String[] parts = line.split(" ",2);
             
             //cases for each action
@@ -97,9 +115,8 @@ public class Main
         
         //closing scnaers
         scnr.close();
-        logScnr.close();
+        lScnr.close();
         fScnr.close();
-        Fstream.close();
     }
     //this finds the node and adds "add" to avalible
     public static void M(BinTree<DVD> B, DVD key, int add)
