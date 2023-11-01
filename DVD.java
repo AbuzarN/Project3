@@ -30,7 +30,6 @@ public class DVD implements Comparable<DVD>
         return  "\n";
     }
 
-
    //accessors and mutators
     public String getTitle(){return this.Title;}
     public int getAvalible(){return this.Avalible;}
@@ -39,5 +38,4 @@ public class DVD implements Comparable<DVD>
     public void setTitle(String Title){this.Title = Title;}
     public void setAvalible(int Avalible){this.Avalible=Avalible;}
     public void setRented(int Rented){this.Rented=Rented;}
-
 }

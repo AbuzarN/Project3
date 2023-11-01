@@ -14,6 +14,7 @@ public class Main
         String fileName = scnr.nextLine();
         FileInputStream Fstream = new FileInputStream(fileName);
         Scanner fScnr = new Scanner(Fstream);
+        
         //create a binary tree
         BinTree <DVD> B = new BinTree <DVD>();
         
@@ -63,10 +64,7 @@ public class Main
                     B.insert(tempNode);
                 }
                 else//update the node
-                {
-                    M(B, temp,num);
-                }
-                
+                {M(B, temp,num);}
             }
             //Same as add just removing
             else if (parts[0].compareTo("remove")==0)
@@ -77,13 +75,9 @@ public class Main
                 DVD temp  = new DVD(parts[1],0,0);
                 //if the avalible + rented =0 then delete node
                 if ( (B.search(temp)).getAvalible() + (B.search(temp)).getRented() - num <= 0)
-                {
-                    B.delete(temp);
-                }
+                {B.delete(temp);}
                 else
-                {
-                    M(B,temp, -1 * num);
-                }
+                {M(B,temp, -1 * num);}
             }
             //if rent then call the rent function
             else if (parts[0].compareTo("rent")==0)
