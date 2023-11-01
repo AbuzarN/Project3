@@ -5,84 +5,59 @@ public class BinTree <T extends Comparable <T>>
    //Bintree member vars
     private Node<T> root = null;
     public BinTree(){}
+
     //constructor
     public BinTree(T node)
-    {
-      root = new Node<T>(null,null, node);
-    }
-    //insert function from zybooks
+    {root = new Node<T>(null,null, node);}
+
+    //insert function
     public void insert(Node<T> node)
+    {insert2(root, node.getPayload()).getPayload();}
+
+    public Node<T> insert2(Node<T> node, T dvd)
     {
+      if (root == null )
+      {
+         root = new Node<T>(null, null, dvd);
+      }
+      if (node == null)
+      {
+         return new Node<T> (null,null,dvd);
+      }
+      if (dvd.compareTo(node.getPayload())<0)
+      {node.setLeft(insert2(node.getLeft(),dvd));}
       
-      if (root == null) {
-         root = node;
-      }
-      else {
-         Node<T> currentNode = root;
-         while (currentNode != null) {
-
-            //System.out.println( ((DVD)currentNode.getPayload()).getTitle() );
-
-            if (node.getPayload().compareTo(currentNode.getPayload())<0) {
-               if (currentNode.getLeft() == null) 
-               {
-                  //System.out.println("2");  
-                  currentNode.setLeft(node);
-                  currentNode = null;
-               }
-               else 
-               {
-                  //System.out.println("2");
-                  currentNode = currentNode.getLeft();
-               }
-            }
-            else {
-               if (currentNode.getRight() == null) 
-               {
-                  //System.out.println("3");
-                  currentNode.setRight(node);
-                  currentNode = null;
-               }
-               else 
-               {
-                  //ystem.out.println("3");
-                  currentNode = currentNode.getRight();
-               }
-            }            
-         }
-      }
+      else if (dvd.compareTo(node.getPayload())>0)
+      {node.setRight(insert2(node.getRight(),dvd));}
+      return node;
     }   
     //search function from zybooks
-    public T search(T dvd)
+    public T search (T dvd)
+    {return search2(root, dvd);}
+    private T search2(Node<T> node, T dvd)
     {
-        Node<T> cur = root;
-        while(cur != null)
+        if (node == null)
         {
-         //System.out.println(((DVD)cur.getPayload()).getTitle());
-            //System.out.println("dvd: "+((DVD)dvd).getTitle()+"/cur: "+((DVD)cur.getPayload()).getTitle()+"    "+ dvd.compareTo(cur.getPayload()));
-            if (dvd.compareTo(cur.getPayload())==0)
-            {
-               //System.out.println("1");
-                return cur.getPayload();
-            }
-            else if (dvd.compareTo(cur.getPayload())<0)
-            {
-               //System.out.println("2");
-                cur = cur.getLeft();
-            }
-            else
-            {
-               //System.out.println("3");
-                cur = cur.getRight();
-            }
+         return null;
+        }
+        else if (node.getPayload().compareTo(dvd)==0)
+        {
+         return node.getPayload();
+        }
+        else if (node.getPayload().compareTo(dvd)>0)
+        {
+         return search2(node.getLeft(), dvd);
+        }
+        else if (node.getPayload().compareTo(dvd)<0)
+        {
+         return search2(node.getRight(), dvd);
         }
         return null;
     }
-    public void delete(T dvd)
-    {
-      delete2(getRoot(),dvd);
-    }
     //delete function 
+    public void delete(T dvd)
+    {delete2(root,dvd);}
+    
     private Node<T> delete2(Node<T> node, T dvd)
     {
       if (node == null)
@@ -120,6 +95,10 @@ public class BinTree <T extends Comparable <T>>
     }
 
    //transversal method recursive to print the log
+   public void printInorder()
+   {
+      printInorder(root);
+   }
     public void printInorder(Node<T> node)
     {
         if (node == null)
@@ -133,10 +112,5 @@ public class BinTree <T extends Comparable <T>>
  
         // Now recur on right child
         printInorder(node.getRight());
-    }
-   //return root function for recursive log
-    public Node<T> getRoot()
-    {
-      return root;
     }
 }

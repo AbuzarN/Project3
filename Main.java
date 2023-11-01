@@ -9,7 +9,9 @@ public class Main
     public static void main(String args[]) throws IOException
     {
        //create a String to use to open a file of that name
-        String fileName = "sample_inventory.dat";
+        Scanner scnr = new Scanner (System.in);
+        System.out.println("Enter Inventory File Name: ");
+        String fileName = scnr.nextLine();
         FileInputStream Fstream = new FileInputStream(fileName);
         Scanner fScnr = new Scanner(Fstream);
         //create a binary tree
@@ -39,7 +41,8 @@ public class Main
         //String logfile = scnr.nextLine();
         
         //create a string to read the log
-        String logfile = "sample_transaction.log";
+
+        String logfile = scnr.nextLine();
         FileInputStream logStream = new FileInputStream(logfile);
         Scanner logScnr = new Scanner(logStream);
 
@@ -104,11 +107,12 @@ public class Main
             }
         }
         //this prints the log
-        B.printInorder(B.getRoot());
+        B.printInorder();
         //DVD search = new DVD("\"The Crow\"", 0, 100);
         //System.out.print(B.search(search));
         
         //closing scnaers
+        scnr.close();
         logScnr.close();
         fScnr.close();
         Fstream.close();
