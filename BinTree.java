@@ -37,21 +37,17 @@ public class BinTree <T extends Comparable <T>>
     private T search2(Node<T> node, T dvd)
     {
         if (node == null)
-        {
-         return null;
-        }
+        {return null;}
+
         else if (node.getPayload().compareTo(dvd)==0)
-        {
-         return node.getPayload();
-        }
+        {return node.getPayload();}
+
         else if (node.getPayload().compareTo(dvd)>0)
-        {
-         return search2(node.getLeft(), dvd);
-        }
+        {return search2(node.getLeft(), dvd);}
+
         else if (node.getPayload().compareTo(dvd)<0)
-        {
-         return search2(node.getRight(), dvd);
-        }
+        {return search2(node.getRight(), dvd);}
+
         return null;
     }
     //delete function 
@@ -102,7 +98,7 @@ public class BinTree <T extends Comparable <T>>
     public void printInorder(Node<T> node)
     {
         if (node == null)
-            return;
+        {return;}
  
         // First recur on left child
         printInorder(node.getLeft());

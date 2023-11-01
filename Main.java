@@ -26,22 +26,15 @@ public class Main
             
             //create a temporary DVD to be used as a Node
             DVD temp = new DVD( parts[0], Integer.parseInt(parts[1]) , Integer.parseInt(parts[2])); 
-            //System.out.print(temp.getTitle()+" "+temp.getAvalible()+" "+temp.getRented());
-            //System.out.println();
-
-            //System.out.println("Inserteing: "+ parts[0]+parts[1]+parts[2]);
             
             //Node to insert in the tree
             Node <DVD>tempNode = new Node<DVD> (null, null, temp);
             //insert Node into tree
-            B.insert(tempNode);   
-            //System.out.println("");
+            B.insert(tempNode);
         }
-
-        //String logfile = scnr.nextLine();
         
         //create a string to read the log
-
+        System.out.println("Enter log File Name: ");
         String logfile = scnr.nextLine();
         FileInputStream logStream = new FileInputStream(logfile);
         Scanner logScnr = new Scanner(logStream);
@@ -53,7 +46,6 @@ public class Main
            //parse the log lines by " "
             String line = logScnr.nextLine();
             String[] parts = line.split(" ",2);
-            //System.out.println(line);
             
             //cases for each action
             if (parts[0].compareTo("add")==0)
@@ -108,8 +100,6 @@ public class Main
         }
         //this prints the log
         B.printInorder();
-        //DVD search = new DVD("\"The Crow\"", 0, 100);
-        //System.out.print(B.search(search));
         
         //closing scnaers
         scnr.close();
@@ -120,10 +110,8 @@ public class Main
     //this finds the node and adds "add" to avalible
     public static void M(BinTree<DVD> B, DVD key, int add)
     {
-        //Node tempNode = new Node(null,null,key);
         DVD temp = B.search(key);
         temp.setAvalible(temp.getAvalible()+add);
-        //System.out.println(B.search(key));
     }
     // This searches the tree for the right DVD then moces num from avalible to rent
     public static void rent(BinTree<DVD> B, DVD key)
@@ -131,15 +119,12 @@ public class Main
         DVD temp = B.search(key);
         temp.setAvalible(temp.getAvalible()-1);
         temp.setRented(temp.getRented()+1);
-        //System.out.println(B.search(key));
     }
     //this moves rented to avalible
     public static void returnDVD(BinTree<DVD> B, DVD key)
     {
-        //System.out.println("start");
         DVD temp = B.search(key);
         temp.setAvalible(temp.getAvalible()+1);
-        temp.setRented(temp.getRented()-1);
-        //System.out.println(B.search(key));
+        temp.setRented(temp.getRented()-1);    
     }
 }
